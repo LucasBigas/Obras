@@ -92,7 +92,7 @@ public class ProjetoDAO {
         }
     }
 
-    public void desalocarEngenheiro(int idProjeto, int idEngenheiro) throws SQLException {
+    public void retirarEngenheiro(int idProjeto, int idEngenheiro) throws SQLException {
         String sql = "DELETE FROM Alocacao_Engenheiro WHERE ID_Projeto = ? AND ID_Engenheiro = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idProjeto);
@@ -111,7 +111,7 @@ public class ProjetoDAO {
         }
     }
 
-    public void desalocarOperario(int idProjeto, int idOperario) throws SQLException {
+    public void retirarOperario(int idProjeto, int idOperario) throws SQLException {
         String sql = "DELETE FROM Alocacao_Operario WHERE ID_Projeto = ? AND ID_Operario = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idProjeto);
@@ -130,7 +130,7 @@ public class ProjetoDAO {
         }
     }
 
-    public void desusarEquipamento(int idProjeto, int idEquipamento) throws SQLException {
+    public void retirarEquipamento(int idProjeto, int idEquipamento) throws SQLException {
         String sql = "DELETE FROM Uso_Equipamento WHERE ID_Projeto = ? AND ID_Equipamento = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idProjeto);
@@ -149,14 +149,6 @@ public class ProjetoDAO {
         }
     }
 
-    public void desconsumirMaterial(int idProjeto, int idMaterial) throws SQLException {
-        String sql = "DELETE FROM Consumo_Material WHERE ID_Projeto = ? AND ID_Material = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idProjeto);
-            stmt.setInt(2, idMaterial);
-            stmt.executeUpdate();
-        }
-    }
 
     // Métodos para listar engenheiros e operários alocados em um projeto
     public List<Engenheiro> listarEngenheirosPorProjeto(int idProjeto) throws SQLException {
