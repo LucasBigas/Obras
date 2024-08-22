@@ -90,7 +90,7 @@ public class Main {
         projetoDAO.usarEquipamento(projeto1.getIdProjeto(), equipamento1.getIdEquipamento());
 
         // Listar projetos
-        List<Projeto> projetos = projetoDAO.lisarProjetos();
+        List<Projeto> projetos = projetoDAO.listarProjetos();
         System.out.println("Projetos:");
         for (Projeto p : projetos) {
             System.out.println(p.getIdProjeto() + ": " + p.getNomeProjeto() + " - Local: " + p.getLocal());
