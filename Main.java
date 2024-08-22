@@ -79,11 +79,6 @@ public class Main {
         materialDAO.inserirMaterial(material2);
 
 
-        // Associar engenheiros e operários aos projetos
-        // Alocar engenheiros e operários em projetos
-
-
-
         projetoDAO.alocarEngenheiro(projeto1.getIdProjeto(), engenheiro1.getIdEngenheiro());
         projetoDAO.alocarOperario(projeto1.getIdProjeto(),operario1.getIdOperario());
         projetoDAO.consumirMaterial(projeto1.getIdProjeto(), material1.getIdMaterial());
