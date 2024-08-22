@@ -60,7 +60,7 @@ public class ProjetoDAO {
 
 
 
-    public List<Projeto>lisarProjetos() throws SQLException{
+    public List<Projeto>listarProjetos() throws SQLException{
         List<Projeto>projetos = new ArrayList<>();
         String sql = "SELECT * FROM Projeto";
         try(PreparedStatement stmt = connection.prepareStatement(sql)){
@@ -92,15 +92,7 @@ public class ProjetoDAO {
         }
     }
 
-    public void retirarEngenheiro(int idProjeto, int idEngenheiro) throws SQLException {
-        String sql = "DELETE FROM Alocacao_Engenheiro WHERE ID_Projeto = ? AND ID_Engenheiro = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idProjeto);
-            stmt.setInt(2, idEngenheiro);
-            stmt.executeUpdate();
-        }
-    }
-
+   
     // Métodos para Alocacao_Operario
     public void alocarOperario(int idProjeto, int idOperario) throws SQLException {
         String sql = "INSERT INTO Alocacao_Operario (ID_Projeto, ID_Operario) VALUES (?, ?)";
@@ -111,15 +103,7 @@ public class ProjetoDAO {
         }
     }
 
-    public void retirarOperario(int idProjeto, int idOperario) throws SQLException {
-        String sql = "DELETE FROM Alocacao_Operario WHERE ID_Projeto = ? AND ID_Operario = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idProjeto);
-            stmt.setInt(2, idOperario);
-            stmt.executeUpdate();
-        }
-    }
-
+    
     // Métodos para Uso_Equipamento
     public void usarEquipamento(int idProjeto, int idEquipamento) throws SQLException {
         String sql = "INSERT INTO Uso_Equipamento (ID_Projeto, ID_Equipamento) VALUES (?, ?)";
@@ -130,14 +114,6 @@ public class ProjetoDAO {
         }
     }
 
-    public void retirarEquipamento(int idProjeto, int idEquipamento) throws SQLException {
-        String sql = "DELETE FROM Uso_Equipamento WHERE ID_Projeto = ? AND ID_Equipamento = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idProjeto);
-            stmt.setInt(2, idEquipamento);
-            stmt.executeUpdate();
-        }
-    }
 
     // Métodos para Consumo_Material
     public void consumirMaterial(int idProjeto, int idMaterial) throws SQLException {
