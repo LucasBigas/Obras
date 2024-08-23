@@ -3,10 +3,7 @@ package DAO;
 import ConexaoBD.ConexaoBD;
 import Entity.Operario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +12,19 @@ public class OperarioDAO {
 
     public OperarioDAO ()throws SQLException{
         this.connection = ConexaoBD.getInstancia().getConnection();
+    }
+
+    public void criarTabelaOperario()throws SQLException{
+        String createOperario = """
+        CREATE TABLE IF NOT EXISTS Operario (
+            ID_Operario INT AUTO_INCREMENT PRIMARY KEY,
+            Nome_Operario VARCHAR(100) NOT NULL,
+            Funcao VARCHAR(100)
+            ); 
+        """;
+        try(Statement stmt = connection.createStatement()) {
+            stmt.execute(createOperario);
+        }
     }
 
     public void inserirOperario(Operario operario)throws SQLException{

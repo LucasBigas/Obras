@@ -3,10 +3,7 @@ package DAO;
 import ConexaoBD.ConexaoBD;
 import Entity.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +12,92 @@ public class ProjetoDAO {
 
     public ProjetoDAO()throws SQLException{
         this.connection = ConexaoBD.getInstancia().getConnection();
+    }
+
+    public void criarTabela(){
+        String createProjeto = """
+                CREATE TABLE IF NOT EXISTS Projeto (
+                    ID_Projeto INT AUTO_INCREMENT PRIMARY KEY,
+                    Nome_Projeto VARCHAR(100) NOT NULL,
+                    Local VARCHAR(100) NOT NULL,
+                    Data_Inicio DATE,
+                    Data_Termino DATE 
+                    ); 
+                    """;
+        try(Statement stmt = connection.createStatement()) {
+            stmt.execute(createProjeto);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void  criarTabelaAlocacaoEngenheiro(){
+        String createAlocacaoEngenheiro = """
+        CREATE TABLE IF NOT EXISTS Alocacao_Engenheiro (
+            ID_Projeto INT,
+            ID_Engenheiro INT,
+            PRIMARY KEY (ID_Projeto, ID_Engenheiro),
+            FOREIGN KEY (ID_Projeto) REFERENCES Projeto(ID_Projeto),
+            FOREIGN KEY (ID_Engenheiro) REFERENCES Engenheiro(ID_Engenheiro)
+            ); 
+        """;
+        try (Statement stmt = connection.createStatement()){
+            stmt.execute(createAlocacaoEngenheiro);
+        }catch (SQLException e){
+
+        }
+    }
+
+    public void criarAlocacaoOperario(){
+        String createAlocacaoOperario = """
+        CREATE TABLE IF NOT EXISTS Alocacao_Operario (
+            ID_Projeto INT,
+            ID_Operario INT,
+            PRIMARY KEY (ID_Projeto, ID_Operario),
+            FOREIGN KEY (ID_Projeto) REFERENCES Projeto(ID_Projeto),
+            FOREIGN KEY (ID_Operario) REFERENCES Operario(ID_Operario)
+            ); 
+        """;
+        try(Statement stmt = connection.createStatement()){
+            stmt.execute(createAlocacaoOperario);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void criarUsoEquipamento(){
+        String createUsoEquipamento = """
+        CREATE TABLE IF NOT EXISTS Uso_Equipamento (
+            ID_Projeto INT,
+            ID_Equipamento INT,
+            PRIMARY KEY (ID_Projeto, ID_Equipamento),
+            FOREIGN KEY (ID_Projeto) REFERENCES Projeto(ID_Projeto),
+            FOREIGN KEY (ID_Equipamento) REFERENCES Equipamento(ID_Equipamento)
+            ); 
+        """;
+        try(Statement stmt = connection.createStatement()){
+            stmt.execute(createUsoEquipamento);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void criarConsumoMaterial(){
+        String createConsumoMaterial = """
+        CREATE TABLE IF NOT EXISTS Consumo_Material (
+            ID_Projeto INT,
+            ID_Material INT,
+            PRIMARY KEY (ID_Projeto, ID_Material),
+            FOREIGN KEY (ID_Projeto) REFERENCES Projeto(ID_Projeto),
+            FOREIGN KEY (ID_Material) REFERENCES Material(ID_Material)
+            ); 
+        """;
+        try(Statement stmt = connection.createStatement()){
+            stmt.execute(createConsumoMaterial);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void inserirProjeto(Projeto projeto) {

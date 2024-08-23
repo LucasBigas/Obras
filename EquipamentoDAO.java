@@ -3,10 +3,7 @@ package DAO;
 import ConexaoBD.ConexaoBD;
 import Entity.Equipamento;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +12,19 @@ public class EquipamentoDAO {
 
     public EquipamentoDAO()throws SQLException{
         this.connection = ConexaoBD.getInstancia().getConnection();
+    }
+
+    public  void criarTabelaEquipamento()throws SQLException{
+        String createEquipamento = """
+        CREATE TABLE IF NOT EXISTS Equipamento (
+            ID_Equipamento INT AUTO_INCREMENT PRIMARY KEY,
+            Nome_Equipamento VARCHAR(100) NOT NULL,
+            Tipo VARCHAR(100)
+            ); 
+        """;
+        try(Statement stmt = connection.createStatement()){
+            stmt.execute(createEquipamento);
+        }
     }
 
     public void inserirEquipamento(Equipamento equipamento)throws SQLException{

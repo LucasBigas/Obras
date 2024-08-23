@@ -3,10 +3,7 @@ package DAO;
 import ConexaoBD.ConexaoBD;
 import Entity.Engenheiro;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,19 @@ public class EngenheiroDAO {
     public EngenheiroDAO()throws SQLException{
         this.connection = ConexaoBD.getInstancia().getConnection();
     }
+    public void criarTabelaEngenheiro() throws SQLException{
+        String createEngenheiro = """
+        CREATE TABLE IF NOT EXISTS Engenheiro (
+            ID_Engenheiro INT AUTO_INCREMENT PRIMARY KEY,
+            Nome_Engenheiro VARCHAR(100) NOT NULL,
+            Especialidade VARCHAR(100)
+            ); 
+        """;
 
+        try(Statement stmt = connection.createStatement()){
+            stmt.execute(createEngenheiro);
+        }
+    }
     public void inserirEngenheiro(Engenheiro engenheiro)throws SQLException{
         String sql = "INSERT INTO Engenheiro (Nome_Engenheiro, Especialidade) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS)){

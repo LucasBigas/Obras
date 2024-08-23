@@ -17,6 +17,15 @@ public class Main {
         EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
         MaterialDAO materialDAO = new MaterialDAO();
 
+        projetoDAO.criarTabela();
+        engenheiroDAO.criarTabelaEngenheiro();
+        operarioDAO.criarTabelaOperario();
+        equipamentoDAO.criarTabelaEquipamento();
+        materialDAO.criarTabelaMaterial();
+        projetoDAO.criarTabelaAlocacaoEngenheiro();
+        projetoDAO.criarAlocacaoOperario();
+        projetoDAO.criarUsoEquipamento();
+        projetoDAO.criarConsumoMaterial();
 
         // Inserir projetos
 
@@ -34,9 +43,10 @@ public class Main {
         projeto2.setLocal("Zona Norte");
         projeto2.setDataIncio(Date.valueOf("2023-02-01"));
         projeto2.setDataTerminio(Date.valueOf("2024-11-30"));
-       projetoDAO.inserirProjeto(projeto2);
+        projetoDAO.inserirProjeto(projeto2);
 
         // Inserir engenheiros
+
         Engenheiro engenheiro1 = new Engenheiro();
         engenheiro1.setIdEngenheiro(1);
         engenheiro1.setNomeEngenheiro("Lucas");
@@ -89,6 +99,7 @@ public class Main {
         materialDAO.inserirMaterial(material2);
 
         // Atualizar
+        /*
         projeto1.setLocal("SP");
         projetoDAO.atualizarProjeto(projeto1);
 
@@ -103,37 +114,99 @@ public class Main {
         equipamentoDAO.atualizarEquipamento(equipamento1);
 
         material1.setQuantidade(5);
-        materialDAO.atualizarMaterial(material1);
+        materialDAO.atualizarMaterial(material1);*/
 
 
 
         // Alocar , usar e consumir
+
         projetoDAO.alocarEngenheiro(projeto1.getIdProjeto(), engenheiro1.getIdEngenheiro());
         projetoDAO.alocarOperario(projeto1.getIdProjeto(),operario1.getIdOperario());
         projetoDAO.consumirMaterial(projeto1.getIdProjeto(), material1.getIdMaterial());
         projetoDAO.usarEquipamento(projeto1.getIdProjeto(), equipamento1.getIdEquipamento());
+        //-----------------------------------------------------------------------------------//
+        /*
         projetoDAO.alocarEngenheiro(projeto2.getIdProjeto(), engenheiro2.getIdEngenheiro());
         projetoDAO.alocarOperario(projeto2.getIdProjeto(),operario2.getIdOperario());
         projetoDAO.consumirMaterial(projeto2.getIdProjeto(), material2.getIdMaterial());
-        projetoDAO.usarEquipamento(projeto2.getIdProjeto(), equipamento2.getIdEquipamento());
+        projetoDAO.usarEquipamento(projeto2.getIdProjeto(), equipamento2.getIdEquipamento());*/
 
         // Retirar
+        /*
         projetoDAO.desalocarTodosEngenheirosDoProjeto(projeto1.getIdProjeto());
         projetoDAO.desalocarTodosOperariosDoProjeto(projeto1.getIdProjeto());
         projetoDAO.removerTodosMateriaisDoProjeto(projeto1.getIdProjeto());
-        projetoDAO.removerTodosEquipamentosDoProjeto(projeto1.getIdProjeto());
+        projetoDAO.removerTodosEquipamentosDoProjeto(projeto1.getIdProjeto());*/
 
 
         //Excluir
+        /*
         projetoDAO.excluirProjeto(1);
         engenheiroDAO.excluirEngenheiro(2);
         operarioDAO.excluirOperario(operario2.getIdOperario());
         equipamentoDAO.excluirEquipamento(equipamento2.getIdEquipamento());
-        materialDAO.excluirMaterial(material2.getIdMaterial());
+        materialDAO.excluirMaterial(material2.getIdMaterial());*/
 
-        // Listar projetos
+        // Listar todos os projetos
         List<Projeto> projetos = projetoDAO.listarProjetos();
         System.out.println("Projetos:");
+        System.out.println("------------------------------------------------------------------");
+        for (Projeto p : projetos) {
+            System.out.println("ID: " + p.getIdProjeto());
+            System.out.println("Nome: " + p.getNomeProjeto());
+            System.out.println("Local: " + p.getLocal());
+            System.out.println("Data de Início: " + p.getDataIncio());
+            System.out.println("Data de Término: " + p.getDataTerminio());
+            System.out.println("------------------------------------------------------------------");
+        }
+
+        // Listar todos os engenheiros
+        List<Engenheiro> engenheiros = engenheiroDAO.listarEngenheiro();
+        System.out.println("Engenheiros:");
+        System.out.println("------------------------------------------------------------------");
+        for (Engenheiro e : engenheiros) {
+            System.out.println("ID: " + e.getIdEngenheiro());
+            System.out.println("Nome: " + e.getNomeEngenheiro());
+            System.out.println("Especialidade: " + e.getEspecialidade());
+            System.out.println("------------------------------------------------------------------");
+        }
+
+        // Listar todos os operários
+        List<Operario> operarios = operarioDAO.listarOperarios();
+        System.out.println("Operários:");
+        System.out.println("------------------------------------------------------------------");
+        for (Operario o : operarios) {
+            System.out.println("ID: " + o.getIdOperario());
+            System.out.println("Nome: " + o.getNomeOperario());
+            System.out.println("Função: " + o.getFuncao());
+            System.out.println("------------------------------------------------------------------");
+        }
+
+        // Listar todos os equipamentos
+        List<Equipamento> equipamentos = equipamentoDAO.listarEquipamentos();
+        System.out.println("Equipamentos:");
+        System.out.println("------------------------------------------------------------------");
+        for (Equipamento e : equipamentos) {
+            System.out.println("ID: " + e.getIdEquipamento());
+            System.out.println("Nome: " + e.getNomeEquipamento());
+            System.out.println("Tipo: " + e.getTipo());
+            System.out.println("------------------------------------------------------------------");
+        }
+
+        // Listar todos os materiais
+        List<Material> materiais = materialDAO.listarMateriais();
+        System.out.println("Materiais:");
+        System.out.println("------------------------------------------------------------------");
+        for (Material m : materiais) {
+            System.out.println("ID: " + m.getIdMaterial());
+            System.out.println("Nome: " + m.getNomeMaterial());
+            System.out.println("Quantidade: " + m.getQuantidade());
+            System.out.println("------------------------------------------------------------------");
+        }
+
+
+        // Listar projetos com detalhes dos recursos
+        System.out.println("Detalhes dos Projetos:");
         System.out.println("------------------------------------------------------------------");
         for (Projeto p : projetos) {
             System.out.println("ID: " + p.getIdProjeto());
@@ -189,6 +262,7 @@ public class Main {
 
             System.out.println("------------------------------------------------------------------");
         }
+
 
 
     } catch (SQLException e) {

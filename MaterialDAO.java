@@ -3,10 +3,7 @@ package DAO;
 import ConexaoBD.ConexaoBD;
 import Entity.Material;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +12,19 @@ public class MaterialDAO {
 
     public MaterialDAO()throws SQLException{
         this.connection = ConexaoBD.getInstancia().getConnection();
+    }
+
+    public void criarTabelaMaterial()throws SQLException{
+        String createMaterial = """
+        CREATE TABLE IF NOT EXISTS Material (
+            ID_Material INT AUTO_INCREMENT PRIMARY KEY,
+            Nome_Material VARCHAR(100) NOT NULL,
+            Quantidade INT
+            ); 
+        """;
+        try(Statement stmt = connection.createStatement()){
+            stmt.execute(createMaterial);
+        }
     }
 
     public void inserirMaterial (Material material)throws SQLException{
