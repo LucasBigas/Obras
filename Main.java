@@ -22,44 +22,44 @@ public class Main {
 
         Projeto projeto1 = new Projeto();
         projeto1.setIdProjeto(1);
-        projeto1.setNomeProjeto("Construção do Edifício A");
-        projeto1.setLocal("Centro da Cidade");
+        projeto1.setNomeProjeto("Construção de Apt");
+        projeto1.setLocal("Centro");
         projeto1.setDataIncio(Date.valueOf("2024-01-01"));
         projeto1.setDataTerminio(Date.valueOf("2024-12-31"));
         projetoDAO.inserirProjeto(projeto1);
 
         Projeto projeto2 = new Projeto();
         projeto2.setIdProjeto(2);
-        projeto2.setNomeProjeto("Reforma do Edifício B");
+        projeto2.setNomeProjeto("Reforma do terminal Central ");
         projeto2.setLocal("Zona Norte");
-        projeto2.setDataIncio(Date.valueOf("2024-02-01"));
+        projeto2.setDataIncio(Date.valueOf("2023-02-01"));
         projeto2.setDataTerminio(Date.valueOf("2024-11-30"));
        projetoDAO.inserirProjeto(projeto2);
 
         // Inserir engenheiros
         Engenheiro engenheiro1 = new Engenheiro();
         engenheiro1.setIdEngenheiro(1);
-        engenheiro1.setNomeEngenheiro("Carlos Silva");
+        engenheiro1.setNomeEngenheiro("Lucas");
         engenheiro1.setEspecialidade("Estruturas");
         engenheiroDAO.inserirEngenheiro(engenheiro1);
 
         Engenheiro engenheiro2 = new Engenheiro();
         engenheiro2.setIdEngenheiro(2);
-        engenheiro2.setNomeEngenheiro("Ana Costa");
-        engenheiro2.setEspecialidade("Elétrica");
+        engenheiro2.setNomeEngenheiro("Valdemir");
+        engenheiro2.setEspecialidade("Eletrico");
         engenheiroDAO.inserirEngenheiro(engenheiro2);
 
         // Inserir operários
         Operario operario1 = new Operario();
         operario1.setIdOperario(1);
-        operario1.setNomeOperario("José Pereira");
+        operario1.setNomeOperario("Rodrigo");
         operario1.setFuncao("Pedreiro");
         operarioDAO.inserirOperario(operario1);
 
         Operario operario2 = new Operario();
         operario2.setIdOperario(2);
-        operario2.setNomeOperario("Maria Souza");
-        operario2.setFuncao("Eletricista");
+        operario2.setNomeOperario("Ismael");
+        operario2.setFuncao("Aux. Construção");
         operarioDAO.inserirOperario(operario2);
 
         // Inserir equipamentos
@@ -84,7 +84,7 @@ public class Main {
 
         Material material2 = new Material();
         material2.setIdMaterial(2);
-        material2.setNomeMaterial("Areia");
+        material2.setNomeMaterial("Cal");
         material2.setQuantidade(300);
         materialDAO.inserirMaterial(material2);
 
@@ -98,7 +98,8 @@ public class Main {
         operario1.setFuncao("Marceneiro");
         operarioDAO.atualizarOperario(operario1);
 
-        equipamento1.setTipo("MS");
+        equipamento1.setNomeEquipamento("Trena");
+        equipamento1.setTipo("Medida");
         equipamentoDAO.atualizarEquipamento(equipamento1);
 
         material1.setQuantidade(5);
