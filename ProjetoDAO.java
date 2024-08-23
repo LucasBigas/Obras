@@ -57,6 +57,38 @@ public class ProjetoDAO {
         }
     }
 
+    public void desalocarTodosEngenheirosDoProjeto(int projetoId) throws SQLException {
+        String sql = "DELETE FROM alocacao_engenheiro WHERE ID_Projeto = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, projetoId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void desalocarTodosOperariosDoProjeto(int projetoId) throws SQLException {
+        String sql = "DELETE FROM alocacao_operario WHERE ID_Projeto = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, projetoId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void removerTodosMateriaisDoProjeto(int projetoId) throws SQLException {
+        String sql = "DELETE FROM consumo_material WHERE ID_Projeto = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, projetoId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void removerTodosEquipamentosDoProjeto(int projetoId) throws SQLException {
+        String sql = "DELETE FROM uso_equipamento WHERE ID_Projeto = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, projetoId);
+            stmt.executeUpdate();
+        }
+    }
+
 
 
 
